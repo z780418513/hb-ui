@@ -1,17 +1,15 @@
 <template>
   <div>
-    <router-view></router-view>
+    <h1>home</h1>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "HomeView"
 }
-
 </script>
 
-<style>
+<style scoped>
 
 </style>
