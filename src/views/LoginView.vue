@@ -41,7 +41,6 @@ export default {
       }
       try {
         const res = login(param);
-        console.log(res)
       } catch (err) {
         console.log(err)
       }

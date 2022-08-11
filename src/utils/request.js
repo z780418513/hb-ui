@@ -32,9 +32,10 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
     (response) => {
+        console.log(response)
         // 接口响应不为200，就弹窗错误提示
         if (response.data.code !== 200){
-            ElMessage.error(response.data.message)
+            ElMessage.error(response.data.msg)
         }
         return response.data
     },
