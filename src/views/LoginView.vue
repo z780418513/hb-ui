@@ -12,10 +12,8 @@
       <!--密码-->
       <el-form-item label="密码">
         <el-col :span="18">
-          <el-input v-model="password" type="password" placeholder="请输入密码"
-                    show-password></el-input>
+          <el-input v-model="password" type="password" placeholder="请输入密码" show-password></el-input>
         </el-col>
-
       </el-form-item>
 
       <el-button @click="toLogin">登录</el-button>
@@ -23,8 +21,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {reactive, toRefs} from "vue";
+import {login} from '@/api/login.js'
 
 export default {
   name: "LoginView",
@@ -35,10 +34,18 @@ export default {
     });
 
     // 登录请求
-    const toLogin= function (){
-
+    const toLogin = async function () {
+      const param = {
+        username: data.username,
+        password: data.password,
+      }
+      try {
+        const res = login(param);
+        console.log(res)
+      } catch (err) {
+        console.log(err)
+      }
     }
-
     return {
       ...toRefs(data),
       toLogin
