@@ -5,14 +5,25 @@
       <!--用户名-->
       <el-form-item label="用户名">
         <el-col :span="18">
-          <el-input v-model="username" placeholder="请输入用户名"></el-input>
+          <el-input v-model="data.username" placeholder="请输入用户名"></el-input>
         </el-col>
       </el-form-item>
 
       <!--密码-->
       <el-form-item label="密码">
         <el-col :span="18">
-          <el-input v-model="password" type="password" placeholder="请输入密码" show-password></el-input>
+          <el-input v-model="data.password" type="password" placeholder="请输入密码" show-password></el-input>
+        </el-col>
+      </el-form-item>
+      <!--验证码-->
+      <el-form-item label="验证码">
+        <el-col :span="18">
+          <el-image style="width: 130px; height: 30px" :src="data.captchaImage" :fit="fit" @click="refreshCaptcha"/>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="验证码">
+        <el-col :span="18">
+          <el-input v-model="data.captcha" placeholder="请输入验证码"></el-input>
         </el-col>
       </el-form-item>
 
@@ -21,35 +32,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import {reactive, toRefs} from "vue";
-import {login} from '@/api/login.js'
+<script lang="ts" setup>
+import {onMounted, reactive, toRefs} from "vue";
+import {login, getCaptcha} from '@/api/login.js'
 
-export default {
-  name: "LoginView",
-  setup() {
-    const data = reactive({
-      username: '',
-      password: '',
-    });
 
-    // 登录请求
-    const toLogin = async function () {
-      const param = {
-        username: data.username,
-        password: data.password,
-      }
-      try {
-        const res = login(param);
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    return {
-      ...toRefs(data),
-      toLogin
-    };
-  }
+const data = reactive({
+  username: '',
+  password: '',
+  captcha: '',
+  captchaImage: ''
+});
+
+// 登录请求
+const toLogin = async function () {
+  const res = login(data);
+}
+
+
+// 验证码
+onMounted(async () => {
+  await getCaptchaImage();
+})
+const getCaptchaImage = async function () {
+  const res = await getCaptcha();
+  data.captchaImage = res.data.image;
+}
+const refreshCaptcha =  function () {
+  getCaptchaImage();
 }
 </script>
 

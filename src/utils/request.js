@@ -24,7 +24,6 @@ service.interceptors.request.use(
     },
     (error) => {
         // 对请求错误做些什么
-        console.log(error)
         return Promise.reject(error)
     }
 )
@@ -32,7 +31,6 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
     (response) => {
-        console.log(response)
         // 接口响应不为200，就弹窗错误提示
         if (response.data.code !== 200){
             ElMessage.error(response.data.msg)
