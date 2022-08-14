@@ -16,9 +16,9 @@
         </el-col>
       </el-form-item>
       <!--验证码-->
-      <el-form-item label="验证码">
+      <el-form-item>
         <el-col :span="18">
-          <el-image style="width: 130px; height: 30px" :src="data.captchaImage" :fit="fit" @click="refreshCaptcha"/>
+          <el-image style="width: 100px; height: 30px" :src="data.captchaImage" @click="refreshCaptcha"/>
         </el-col>
       </el-form-item>
       <el-form-item label="验证码">
@@ -35,6 +35,7 @@
 <script lang="ts" setup>
 import {onMounted, reactive, toRefs} from "vue";
 import {login, getCaptcha} from '@/api/login.js'
+import store from "@/store/index.js";
 
 
 const data = reactive({
@@ -45,8 +46,8 @@ const data = reactive({
 });
 
 // 登录请求
-const toLogin = async function () {
-  const res = login(data);
+const toLogin = function () {
+  store.dispatch('loginAction', data)
 }
 
 
@@ -58,7 +59,7 @@ const getCaptchaImage = async function () {
   const res = await getCaptcha();
   data.captchaImage = res.data.image;
 }
-const refreshCaptcha =  function () {
+const refreshCaptcha = function () {
   getCaptchaImage();
 }
 </script>

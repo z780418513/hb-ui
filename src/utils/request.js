@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {useMessage} from '@/hook/useMessage'
+import store from '@/store'
 
 const ElMessage = useMessage();
 
@@ -11,7 +12,6 @@ const service = axios.create({
     headers: {
         // 设置后端需要的传参类型
         'Content-Type': 'application/json',
-        // 'token': 'your token',
         'X-Requested-With': 'XMLHttpRequest',
     },
 })
@@ -19,7 +19,10 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
     (config) => {
-        // 在发送请求之前做些什么
+        // 拦截请求中的 authorization属性为token
+        const token = store.state.userStore.token;
+        config.headers[process.env.VUE_APP_TOKEN_AUTH_NAME] = token;
+
         return config
     },
     (error) => {
@@ -32,7 +35,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     (response) => {
         // 接口响应不为200，就弹窗错误提示
-        if (response.data.code !== 200){
+        if (response.data.code !== 200) {
             ElMessage.error(response.data.msg)
         }
         return response.data
@@ -42,6 +45,7 @@ service.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+// 添加前置守卫
 
 export default service
 
