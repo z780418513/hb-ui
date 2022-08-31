@@ -6,7 +6,8 @@ const ElMessage = useMessage();
 
 // 创建一个 axios 实例
 const service = axios.create({
-    baseURL: process.env.VUE_APP_URL + '/api', // 所有的请求地址前缀部分
+    // baseURL: process.env.VUE_APP_URL + '/api', // 所有的请求地址前缀部分
+    baseURL: process.env.VUE_APP_URL, // 所有的请求地址前缀部分
     timeout: 1000 * 60 * 5, // 请求超时时间毫秒
     withCredentials: true, // 异步请求携带cookie
     headers: {
@@ -34,8 +35,8 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
     (response) => {
-        // 接口响应不为200，就弹窗错误提示
-        if (response.data.code !== 200) {
+        // 接口响应不为0，就弹窗错误提示
+        if (response.data.code != process.env.VUE_APP_RESULT_SUCCESS) {
             ElMessage.error(response.data.msg)
         }
         return response.data

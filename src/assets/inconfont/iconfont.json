@@ -1,0 +1,37 @@
+{
+  "id": "3601047",
+  "name": "HB",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10056821",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "902044",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "7318486",
+      "name": "日志",
+      "font_class": "zhuanxierizhi",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "11399580",
+      "name": "业务角色",
+      "font_class": "yewujiaose",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    }
+  ]
+}
