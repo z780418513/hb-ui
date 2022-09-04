@@ -6,8 +6,7 @@ const ElMessage = useMessage();
 
 // 创建一个 axios 实例
 const service = axios.create({
-    // baseURL: process.env.VUE_APP_URL + '/api', // 所有的请求地址前缀部分
-    baseURL: process.env.VUE_APP_URL, // 所有的请求地址前缀部分
+    baseURL:  process.env.VUE_APP_URL, // 所有的请求地址前缀部分
     timeout: 1000 * 60 * 5, // 请求超时时间毫秒
     withCredentials: true, // 异步请求携带cookie
     headers: {

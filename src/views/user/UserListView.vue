@@ -159,6 +159,7 @@ const doInsertUser = () => {
   data.insertDialogFlag = true;
   data.disabled = false;
   userFromDate.username = '';
+  userFromDate.id = '';
   userFromDate.realName = '';
   userFromDate.nickName = '';
   userFromDate.mobile = '';
