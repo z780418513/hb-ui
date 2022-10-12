@@ -1,34 +1,43 @@
 <template>
   <div>
-    <el-form label-width="120px" class="login-form">
-      <h1 class="form-top">用户登录</h1>
-      <!--用户名-->
-      <el-form-item label="用户名">
-        <el-col :span="18">
-          <el-input v-model="data.username" placeholder="请输入用户名"></el-input>
-        </el-col>
-      </el-form-item>
+    <el-container>
+      <el-main class="el-mian-login">
+        <el-form label-width="120px" class="login-form">
+          <h1 class="form-top">用户登录</h1>
+          <!--用户名-->
+          <el-form-item label="用户名">
+            <el-col :span="18">
+              <el-input v-model="data.username" placeholder="请输入用户名"></el-input>
+            </el-col>
+          </el-form-item>
 
-      <!--密码-->
-      <el-form-item label="密码">
-        <el-col :span="18">
-          <el-input v-model="data.password" type="password" placeholder="请输入密码" show-password></el-input>
-        </el-col>
-      </el-form-item>
-      <!--      &lt;!&ndash;验证码&ndash;&gt;-->
-      <!--      <el-form-item>-->
-      <!--        <el-col :span="18">-->
-      <!--          <el-image style="width: 100px; height: 30px" :src="data.captchaImage" @click="refreshCaptcha"/>-->
-      <!--        </el-col>-->
-      <!--      </el-form-item>-->
-      <!--      <el-form-item label="验证码">-->
-      <!--        <el-col :span="18">-->
-      <!--          <el-input v-model="data.captcha" placeholder="请输入验证码"></el-input>-->
-      <!--        </el-col>-->
-      <!--      </el-form-item>-->
+          <!--密码-->
+          <el-form-item label="密码">
+            <el-col :span="18">
+              <el-input v-model="data.password" type="password" placeholder="请输入密码" show-password></el-input>
+            </el-col>
+          </el-form-item>
+          <!--      &lt;!&ndash;验证码&ndash;&gt;-->
+          <!--      <el-form-item>-->
+          <!--        <el-col :span="18">-->
+          <!--          <el-image style="width: 100px; height: 30px" :src="data.captchaImage" @click="refreshCaptcha"/>-->
+          <!--        </el-col>-->
+          <!--      </el-form-item>-->
+          <!--      <el-form-item label="验证码">-->
+          <!--        <el-col :span="18">-->
+          <!--          <el-input v-model="data.captcha" placeholder="请输入验证码"></el-input>-->
+          <!--        </el-col>-->
+          <!--      </el-form-item>-->
 
-      <el-button @click="toLogin">登录</el-button>
-    </el-form>
+          <el-button @click="toLogin">登录</el-button>
+        </el-form>
+      </el-main>
+      <el-footer>
+        <a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2022014205号-1</a>
+      </el-footer>
+    </el-container>
+
+
   </div>
 </template>
 
@@ -76,6 +85,9 @@ const toLogin = async function () {
   border-radius: 8px;
   margin: 100px auto;
   width: 500px;
+}
+.el-mian-login{
+  height: 600px;
 }
 
 .form-top {
