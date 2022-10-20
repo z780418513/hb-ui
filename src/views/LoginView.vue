@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-main class="el-mian-login">
+      <el-main class="el-mian-login" :style="data.bgBackground">
         <el-form label-width="120px" class="login-form">
           <h1 class="form-top">用户登录</h1>
           <!--用户名-->
@@ -53,7 +53,21 @@ const data = reactive({
   username: '',
   password: '',
   captcha: '',
-  captchaImage: ''
+  captchaImage: '',
+  // 顶部导航背景图片配置
+  bgBackground: {
+    // 背景图片地址
+    backgroundImage: 'url(' + require('../assets/img/bg.jpeg') + ')',
+    backgroundRepeat: "no-repeat",
+    // 背景图片大小
+    backgroundSize: 'cover',
+    // 背景颜色
+    backgroundColor: '#000',
+    // 背景图片位置
+    backgroundPosition: 'center top'
+
+  }
+
 });
 
 // 登录请求
