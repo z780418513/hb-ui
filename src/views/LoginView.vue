@@ -7,8 +7,8 @@
       <el-input class="form-input" v-model="data.username" placeholder="username"></el-input>
 
       <!--密码-->
-      <el-input class="form-input" v-model="data.password" type="password" placeholder="password"
-                show-password></el-input>
+      <el-input class="form-input" v-model="data.password" type="password" placeholder="password" show-password>
+      </el-input>
 
       <!--      &lt;!&ndash;验证码&ndash;&gt;-->
       <!--      <el-form-item>-->
@@ -33,11 +33,14 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, reactive, toRefs, onBeforeMount, onBeforeUnmount} from "vue";
-import {login, getCaptcha} from '@/api/login.js'
+import {
+  reactive,
+  onBeforeMount,
+  onBeforeUnmount
+} from "vue";
 import store from "@/store/index.js";
 import router from "@/router";
-import {useMessage} from '@/hook/useMessage.js'
+
 
 onBeforeMount(() => {
   document.body.style.backgroundImage = data.bgBackground.backgroundImage;
@@ -129,11 +132,11 @@ const toLogin = async function () {
   font-weight: bold;
 }
 
-/deep/ .el-input__wrapper {
-  background-color: rgba(255,255,255,0.1);
+:deep(.el-input__wrapper) {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/deep/ .el-input__inner {
+:deep( .el-input__inner) {
   color: #E9EEF3;
 }
 

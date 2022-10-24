@@ -5,8 +5,6 @@ import store from "./store/index.js";
 
 // 清除浏览器默认样式
 import '@/assets/css/reset.css'
-// elementUi-plus样式
-import '@/assets/css/elementUi.css'
 // 阿里图标
 import '@/assets/inconfont/iconfont.css'
 import '@/assets/inconfont/iconfont.js'

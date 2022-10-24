@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18258345",
+      "name": "晴天 白天",
+      "font_class": "qingtianbaitian",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "25555523",
+      "name": "暗黑模式",
+      "font_class": "dark",
+      "unicode": "e72f",
+      "unicode_decimal": 59183
+    },
+    {
       "icon_id": "10056821",
       "name": "搜索",
       "font_class": "sousuo",

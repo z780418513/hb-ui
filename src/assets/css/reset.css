@@ -28,6 +28,11 @@ button, input, select, textarea { /* for ie */
     font: 12px/1.3 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */
     color: #333;
 }
+/*解决el-dialog点击会添加 el-popup-parent--hidden*/
+body{
+    padding-right: 0px !important;
+    overflow: hidden !important;
+}
 
 
 h1 {

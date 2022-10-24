@@ -25,3 +25,26 @@ export function deleteUser(id) {
 export function getUserMenus() {
     return request.get('/user/menus')
 }
+
+/*上传头像*/
+export function uploadAvatar(data) {
+    return request.post(`/user/uploadAvatar`, data, {
+        headers: {
+            // 修改Content-type类型
+            'Content-type': 'multipart/form-data',
+        }
+    })
+}
+
+/*查询用户信息*/
+export function getUserInfo(data) {
+    return request.get('/user/getUserInfo', {params: data})
+}
+
+/*查询登录用户名*/
+export function getLoginUserName() {
+// 解析jwt token变量传需要解析的jwt值
+    let tokenPayload = localStorage.getItem(process.env.VUE_APP_TOKEN_LOCALSTORAGE_NAME).split("."); //截取token，获取载体
+    const userinfo = JSON.parse(decodeURIComponent(escape(window.atob(tokenPayload[1].replace(/-/g, "+").replace(/_/g, "/")))));
+    return userinfo.username;
+}
