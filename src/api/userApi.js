@@ -38,13 +38,13 @@ export function uploadAvatar(data) {
 
 /*查询用户信息*/
 export function getUserInfo(data) {
-    return request.get('/user/getUserInfo', {params: data})
+    return request.get('/user/getUserInfo/name', {params: data})
 }
 
 /*查询登录用户名*/
-export function getLoginUserName() {
+export function getLoginUser() {
 // 解析jwt token变量传需要解析的jwt值
     let tokenPayload = localStorage.getItem(process.env.VUE_APP_TOKEN_LOCALSTORAGE_NAME).split("."); //截取token，获取载体
     const userinfo = JSON.parse(decodeURIComponent(escape(window.atob(tokenPayload[1].replace(/-/g, "+").replace(/_/g, "/")))));
-    return userinfo.username;
+    return userinfo;
 }

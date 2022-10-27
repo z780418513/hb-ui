@@ -25,21 +25,27 @@ const routes: Array<RouteRecordRaw> = [
             },
             /*用户列表*/
             {
-                path: "/user/list",
+                path: "/user/index",
                 name: "userList",
                 component: () => import("@/views/user/UserListView.vue"),
             },
             /*角色列表*/
             {
-                path: "/role/list",
+                path: "/role/index",
                 name: "roleList",
                 component: () => import("@/views/role/RoleListView.vue"),
             },
             /*日志列表*/
             {
-                path: "/log/list",
+                path: "/log/index",
                 name: "logList",
                 component: () => import("@/views/log/LogListView.vue"),
+            },
+            /*菜单管理*/
+            {
+                path: "/menu/index",
+                name: "menuIndex",
+                component: () => import("@/views/menu/MenuIndex.vue"),
             },
         ],
     },

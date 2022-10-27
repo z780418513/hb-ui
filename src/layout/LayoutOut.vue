@@ -4,21 +4,22 @@
     <!--头部-->
     <el-header class="home-header">
       <el-row>
-        <el-col :span="18">HB后台管理系统</el-col>
+        <el-col :span="3">HB后台管理系统</el-col>
+        <el-col :span="15"></el-col>
         <!--头像-->
         <el-col :span="1">
           <!--            <a href="#">个人信息</a>-->
           <el-avatar class="avatar-img" :size="45" :src="data.avatar" @click="modifyAvatar"/>
         </el-col>
-<!--        &lt;!&ndash;切换风格&ndash;&gt;-->
-<!--        <el-col :span="1">-->
-<!--          <el-switch-->
-<!--              v-model="data.themeStyle"-->
-<!--              inline-prompt-->
-<!--              :active-icon="data.white"-->
-<!--              :inactive-icon="data.dark"-->
-<!--          />-->
-<!--        </el-col>-->
+        <!--        &lt;!&ndash;切换风格&ndash;&gt;-->
+        <!--        <el-col :span="1">-->
+        <!--          <el-switch-->
+        <!--              v-model="data.themeStyle"-->
+        <!--              inline-prompt-->
+        <!--              :active-icon="data.white"-->
+        <!--              :inactive-icon="data.dark"-->
+        <!--          />-->
+        <!--        </el-col>-->
         <el-col :span="3">
           <el-button type="primary" @click="doLoginOut">退出登录</el-button>
         </el-col>
@@ -28,34 +29,40 @@
     <el-container>
       <!--侧边栏-->
       <el-aside class="home-side">
+
         <el-menu class="el-menu-vertical" default-active="/index" :router="true">
-          <el-sub-menu index="1">
-            <template #title>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-yonghu"></use>
-              </svg>
-              <span>用户管理</span>
-            </template>
-            <el-menu-item index="/user/list">用户列表</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-yewujiaose"></use>
-              </svg>
-              <span>角色管理</span>
-            </template>
-            <el-menu-item index="/role/list">角色列表</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="3">
-            <template #title>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanxierizhi"></use>
-              </svg>
-              <span>日志管理</span>
-            </template>
-            <el-menu-item index="/log/list">历史日志</el-menu-item>
-          </el-sub-menu>
+          <template v-for="menu in data.menuList " :key="menu.id">
+            <!--一级菜单(有子菜单)-->
+            <el-sub-menu v-if="menu.children.length != 0" :index="menu.linkUrl">
+              <template #title>
+                <el-icon>
+                  <!--动态渲染图标，正常使用v-html渲染会失败-->
+                  <component :is="menu.iconUrl"/>
+                </el-icon>
+                <span>{{ menu.name }} </span>
+              </template>
+
+
+              <!--二级菜单-->
+              <el-menu-item v-for="menu2 in menu.children " :key="menu2.id" :index="menu2.linkUrl">
+                <el-icon>
+                  <component :is="menu2.iconUrl"/>
+                </el-icon>
+                {{ menu2.name }}
+              </el-menu-item>
+
+
+            </el-sub-menu>
+            <!--一级菜单(无子菜单-->
+            <el-menu-item v-else :index="menu.linkUrl">
+              <el-icon>
+                <component :is="menu.iconUrl"/>
+              </el-icon>
+              {{ menu.name }}
+            </el-menu-item>
+
+
+          </template>
 
 
         </el-menu>
@@ -96,16 +103,19 @@ import router from "@/router";
 import {onMounted, reactive} from "vue";
 import {useMessage} from '@/hook/useMessage'
 import type {UploadProps} from 'element-plus'
-import {getLoginUserName, getUserInfo, uploadAvatar} from '@/api/userApi'
+import {getLoginUser, getUserInfo, uploadAvatar} from '@/api/userApi'
+import {getMenusByUserId} from '@/api/menuApi.js'
 
 const ElMessage = useMessage();
 
 /*初始化*/
 onMounted(() => {
   // 获取登录用户名
-  const username = getLoginUserName();
+  const user = getLoginUser();
   // 查询用户信息
-  getUserInfoByName(username);
+  getUserInfoByName(user.username);
+  // 查询用户菜单
+  getUserMenu(user.id);
 })
 
 const getUserInfoByName = async (username) => {
@@ -115,6 +125,12 @@ const getUserInfoByName = async (username) => {
   const res = await getUserInfo(params);
   data.userId = res.data.id;
   data.avatar = res.data.avatar;
+}
+
+// 查询用户菜单
+const getUserMenu = async (userId) => {
+  const res = await getMenusByUserId(userId);
+  data.menuList = res.data
 }
 /*退出登录*/
 const doLoginOut = async () => {
@@ -161,8 +177,9 @@ const data = reactive({
   // 用户id
   userId: '',
   themeStyle: '',
-  white:'',
-  dark:'',
+  white: '',
+  dark: '',
+  menuList: []
 })
 
 </script>
@@ -179,7 +196,7 @@ el-container {
   height: 60px;
   text-align: center;
   background-color: white;
-  border: 1px solid rgb(231,230,231);
+  border: 1px solid rgb(231, 230, 231);
 }
 
 .el-col {

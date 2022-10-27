@@ -9,9 +9,17 @@ import '@/assets/css/reset.css'
 import '@/assets/inconfont/iconfont.css'
 import '@/assets/inconfont/iconfont.js'
 import '@/assets/css/iconfont.css'
+// el图标
+import * as Icons from '@element-plus/icons-vue'
 
 
-createApp(App)
-    .use(store)
+const app = createApp(App);
+
+app.use(store)
     .use(router)
     .mount("#app");
+
+// 注册全局组件
+Object.keys(Icons).forEach(key => {
+    app.component(key, Icons[key as keyof typeof Icons])
+})
