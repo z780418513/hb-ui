@@ -35,6 +35,12 @@ const routes: Array<RouteRecordRaw> = [
                 name: "roleList",
                 component: () => import("@/views/role/RoleListView.vue"),
             },
+            /*角色列表*/
+            {
+                path: "/role/2",
+                name: "distributionUser",
+                component: () => import("@/views/role/DistributionUserView.vue"),
+            },
             /*日志列表*/
             {
                 path: "/log/index",
