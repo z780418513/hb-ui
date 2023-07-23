@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: "roleList",
                 component: () => import("@/views/role/RoleListView.vue"),
             },
-            /*角色列表*/
+            /*分配用户*/
             {
                 path: "/role/2",
                 name: "distributionUser",
@@ -52,6 +52,26 @@ const routes: Array<RouteRecordRaw> = [
                 path: "/menu/index",
                 name: "menuIndex",
                 component: () => import("@/views/menu/MenuIndex.vue"),
+            },
+
+
+            /*渠道管理*/
+            {
+                path: "/file/channel",
+                name: "fileChannel",
+                component: () => import("@/views/file/channel/index.vue"),
+            },
+            /*平台管理*/
+            {
+                path: "/file/platform",
+                name: "filePlatform",
+                component: () => import("@/views/file/platform/index.vue"),
+            },
+            /*任务管理*/
+            {
+                path: "/file/task",
+                name: "fileTask",
+                component: () => import("@/views/file/task/index.vue"),
             },
         ],
     },

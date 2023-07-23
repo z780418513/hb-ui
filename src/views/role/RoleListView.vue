@@ -37,7 +37,7 @@
 import {onMounted, reactive} from "vue";
 import {getLoginUser} from '@/api/userApi'
 import {getRoleList} from '@/api/roleApi'
-import {useRouter} from "vue-router";
+import router from '@/router/index.ts'
 
 /*初始化*/
 onMounted(() => {
@@ -54,10 +54,9 @@ const doGetRoleList = async () => {
   console.log(res.data)
 }
 
-const handleDistributionUser = () => {
+const handleDistributionUser = (roleId) => {
   // 跳转角色分配框
-  const router = useRouter()
-  this.$router.push("/role/2")
+  router.push({path: '/role/2', params: {id: roleId}})
 }
 
 const data = reactive({
